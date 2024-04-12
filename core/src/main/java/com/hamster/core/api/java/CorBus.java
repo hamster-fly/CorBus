@@ -35,7 +35,6 @@ public class CorBus {
         receiveBuilder.setIntercepts(builder.intercepts);
         receiveBuilder.setContextLifecycle(builder.context);
         receiveBuilder.setReceiveThread(builder.onThread);
-        receiveBuilder.setReceiveThread(builder.onThread);
         receiveBuilder.setAutoCancel(t -> builder.autoCancelCall.call(t));
         return receiveBuilder.receiving(key, (t, continuation) -> {
             callback.call(t);

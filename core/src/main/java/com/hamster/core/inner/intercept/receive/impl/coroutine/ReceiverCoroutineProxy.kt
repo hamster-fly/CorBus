@@ -68,20 +68,19 @@ internal class ReceiverCoroutineProxy<T>(private val client: IReceiver<T>) : IRe
                 corBusBean = CorBusChain.runPostCustomIntercept(corBusBean,intercepts) as CorBusBean<Any>
             }
             val message = corBusBean.msg as T?
-            autoCancel?.let {
-                // 条件反注册,先判断
-                if(it.invoke(message)){
-                    CorBusDebug.lod("取消注册")
-                    unregister()
-                }
-            }
-            val newJob = Job()
-            val coroutineScope = CoroutineScope(dispatcher + newJob)
-            coroutineScope.launch{
-                launch{
-                    CorBusDebug.lod("receiver key:${poster.key}==>complete invoke receiver listen....")
-                    listen.invoke(message)
-                    newJob.cancel()
+            // 条件反注册,
+            if(autoCancel?.invoke(message) == true){
+                CorBusDebug.lod("取消注册")
+                unregister()
+            }else{
+                val newJob = Job()
+                val coroutineScope = CoroutineScope(dispatcher + newJob)
+                coroutineScope.launch{
+                    launch{
+                        CorBusDebug.lod("receiver key:${poster.key}==>complete invoke receiver listen....")
+                        listen.invoke(message)
+                        newJob.cancel()
+                    }
                 }
             }
             job?.cancel()
