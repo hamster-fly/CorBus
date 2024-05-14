@@ -12,7 +12,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 16
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -48,12 +48,18 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01)
 
     signAllPublications()
-    coordinates("com.hamster.corbus", "cor-bus", "1.0.0-SNAPSHOT")
-
+    coordinates("io.github.hamster-fly", "CorBus", "1.0.0-SNAPSHOT")
+    configure(
+        com.vanniktech.maven.publish.AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = true,
+            publishJavadocJar = true,
+        )
+    )
     pom {
         name.set("CorBus")
         description.set("Kotlin Coroutine Bus!")
-        url.set("https://github.com/username/mylibrary/")
+        url.set("https://github.com/hamster-fly/CorBus/")
         licenses {
             license {
                 name.set("The Apache License, Version 2.0")
@@ -65,13 +71,13 @@ mavenPublishing {
             developer {
                 id.set("hamster")
                 name.set("hamster-fly")
-                url.set("https://github.com/username/")
+                url.set("https://github.com/hamster-fly/")
             }
         }
         scm {
-            url.set("https://github.com/username/mylibrary/")
-            connection.set("scm:git:git://github.com/username/mylibrary.git")
-            developerConnection.set("scm:git:ssh://git@github.com/username/mylibrary.git")
+            url.set("https://github.com/hamster-fly/CorBus/")
+            connection.set("scm:git:git://github.com/hamster-fly/CorBus.git")
+            developerConnection.set("scm:git:ssh://git@github.com/hamster-fly/CorBus.git")
         }
     }
 }
