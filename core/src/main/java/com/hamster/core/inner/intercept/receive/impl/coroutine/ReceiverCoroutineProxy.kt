@@ -76,12 +76,10 @@ internal class ReceiverCoroutineProxy<T>(private val client: IReceiver<T>) : IRe
                 val newJob = Job()
                 val coroutineScope = CoroutineScope(dispatcher + newJob)
                 coroutineScope.launch{
-                    launch{
-                        CorBusDebug.lod("receiver key:${poster.key}==>complete invoke receiver listen....")
-                        listen.invoke(message)
-                        newJob.cancel()
-                    }
+                    CorBusDebug.lod("receiver key:${poster.key}==>complete invoke receiver listen....")
+                    listen.invoke(message)
                 }
+                newJob.join()
             }
             job?.cancel()
             mutex.unlock()
