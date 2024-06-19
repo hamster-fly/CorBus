@@ -1,6 +1,6 @@
 # 欢迎使用 CorBus 协程总线
 
-[English document]()
+[English document](README_EN.md)
 CorBus，是一款基于 `kotlin`、`Coroutine`，为android项目提供的异步总线。
 
 ## 功能点
@@ -13,11 +13,15 @@ CorBus，是一款基于 `kotlin`、`Coroutine`，为android项目提供的异�
 
 ## 如何使用
 
-```
+``` groovy
 kts:
-dependencies {}
+dependencies {
+    implementation("io.github.hamster-fly:CorBus:1.0.0")
+}
 groovy:
-dependencies{  } 
+dependencies{
+    implementation "io.github.hamster-fly:CorBus:1.0.0"
+} 
 ```
 
 

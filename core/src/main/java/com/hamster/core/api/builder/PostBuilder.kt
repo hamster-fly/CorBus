@@ -29,7 +29,7 @@ class PostBuilder internal constructor() {
         this.isOrderly = isOrderly
     }
 
-    fun setProgressCallback(progressCallback: PostProgressCallback){
+    fun setProgressCallback(progressCallback: PostProgressCallback?){
         this.progressCallback = progressCallback
     }
 

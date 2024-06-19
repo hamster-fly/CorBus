@@ -12,6 +12,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -47,13 +48,18 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01)
 
     signAllPublications()
-    coordinates("io.dpj.com", "cor-bus", "1.0.0-SNAPSHOT")
-
+    coordinates("io.github.hamster-fly", "CorBus", "1.0.0-SNAPSHOT")
+    configure(
+        com.vanniktech.maven.publish.AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = true,
+            publishJavadocJar = true,
+        )
+    )
     pom {
         name.set("CorBus")
         description.set("Kotlin Coroutine Bus!")
-        inceptionYear.set("2024")
-        url.set("https://github.com/hamster-fly/CorBus.git")
+        url.set("https://github.com/hamster-fly/CorBus/")
         licenses {
             license {
                 name.set("The Apache License, Version 2.0")
@@ -69,20 +75,9 @@ mavenPublishing {
             }
         }
         scm {
-            url.set("https://github.com/hamster-fly/CorBus.git")
+            url.set("https://github.com/hamster-fly/CorBus/")
             connection.set("scm:git:git://github.com/hamster-fly/CorBus.git")
-            developerConnection.set("scm:git:ssh://git@github.com:hamster-fly/CorBus.git")
-        }
-    }
-}
-publishing {
-    repositories {
-        maven {
-            name = "tal"
-            version = "1.0.0-SNAPSHOT"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) "http://10.14.250.163:8081/repository/Android_Snapshots/" else "http://10.14.250.163:8081/repository/Android_Releases/")
-            credentials(PasswordCredentials::class)
-            isAllowInsecureProtocol = true
+            developerConnection.set("scm:git:ssh://git@github.com/hamster-fly/CorBus.git")
         }
     }
 }
