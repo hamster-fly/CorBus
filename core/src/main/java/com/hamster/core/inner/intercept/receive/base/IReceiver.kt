@@ -12,8 +12,8 @@ import java.util.UUID
 internal interface IContentReceiver<T>{
     val key: String
     val onThread : DispatchThread
-    val listen : suspend (T?)->Unit
-    val autoCancel : ((T?)->Boolean)?
+    val listen : suspend (T)->Unit
+    val autoCancel : ((T)->Boolean)?
     val intercepts : List<ICorBusIntercept>?
 }
 internal interface IReceiver<T> : IContentReceiver<T> {

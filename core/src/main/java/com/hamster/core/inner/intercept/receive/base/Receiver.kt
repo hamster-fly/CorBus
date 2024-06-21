@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 internal class Receiver<T>(
     override val key: String,
     override val onThread: DispatchThread,
-    override val listen: suspend (T?) -> Unit,
-    override val autoCancel : ((T?)->Boolean)?,
+    override val listen: suspend (T) -> Unit,
+    override val autoCancel : ((T)->Boolean)?,
     override val intercepts: List<ICorBusIntercept>?,
 ): IReceiver<T> {
     override fun register() {

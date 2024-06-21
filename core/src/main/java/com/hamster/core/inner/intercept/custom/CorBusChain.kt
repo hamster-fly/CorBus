@@ -33,10 +33,6 @@ internal class CorBusChain(
         return chainBean as CorBusBean<T>
     }
 
-    override fun <R> newChainBean(): CorBusBean<R> {
-        return CorBusBean(null,chainBean.progressCallback,chainBean.onThread)
-    }
-
 
     companion object{
         /**

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.hamster.corbus.test.JavaTestActivity
 import com.hamster.corbus.test.LifecycleTestActivity
 import com.hamster.corbus.test.PostTestActivity
 import com.hamster.core.api.CorBus
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val routes = listOf(
         HomeBean("同步演示", PostTestActivity::class.java),
         HomeBean("生命周期演示", LifecycleTestActivity::class.java),
+        HomeBean("Java调用演示", JavaTestActivity::class.java),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

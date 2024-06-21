@@ -12,7 +12,7 @@ import com.hamster.core.inner.manager.StickManager
  */
 internal class StickReceiverIntercept<T>: IReceiveIntercept<T> {
 
-    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T?>) : IReceiver<T?> {
+    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T>) : IReceiver<T> {
         val content = chain.getChainContent()
         val stick = StickManager.findStick(content.key)
         if(stick != null){

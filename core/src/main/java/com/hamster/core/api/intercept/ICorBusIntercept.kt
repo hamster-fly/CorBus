@@ -14,6 +14,5 @@ interface ICorBusIntercept {
         suspend fun process(chainBean: CorBusBean<*>) : CorBusBean<*>
 
         fun <T> getChainBean(): CorBusBean<T>
-        fun <R> newChainBean(): CorBusBean<R>
     }
 }

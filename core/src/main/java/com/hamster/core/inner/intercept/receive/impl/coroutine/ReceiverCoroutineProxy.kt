@@ -65,9 +65,9 @@ internal class ReceiverCoroutineProxy<T>(private val client: IReceiver<T>) : IRe
             var corBusBean = CorBusBean(poster.msg, poster.progressCallback, onThread)
             // 执行用户自定义的拦截器
             intercepts?.run {
-                corBusBean = CorBusChain.runPostCustomIntercept(corBusBean,intercepts) as CorBusBean<Any>
+                corBusBean = CorBusChain.runPostCustomIntercept(corBusBean,intercepts) as CorBusBean<Any?>
             }
-            val message = corBusBean.msg as T?
+            val message = corBusBean.msg as T
             // 条件反注册,
             if(autoCancel?.invoke(message) == true){
                 CorBusDebug.lod("取消注册")
@@ -78,6 +78,7 @@ internal class ReceiverCoroutineProxy<T>(private val client: IReceiver<T>) : IRe
                 coroutineScope.launch{
                     CorBusDebug.lod("receiver key:${poster.key}==>complete invoke receiver listen....")
                     listen.invoke(message)
+                    newJob.complete()
                 }
                 newJob.join()
             }

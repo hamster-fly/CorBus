@@ -8,7 +8,13 @@ import com.hamster.core.api.builder.java.CorBusPostBuilder;
 import com.hamster.core.api.java.callback.CorBusCallback;
 import com.hamster.core.inner.utils.KotlinToJavaKt;
 
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.IntrinsicsKt;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 
 
 /**
@@ -35,11 +41,12 @@ public class CorBus {
         receiveBuilder.setIntercepts(builder.intercepts);
         receiveBuilder.setContextLifecycle(builder.context);
         receiveBuilder.setReceiveThread(builder.onThread);
-        receiveBuilder.setAutoCancel(t -> builder.autoCancelCall.call(t));
+        if(builder.autoCancelCall != null){
+            receiveBuilder.setAutoCancel(t -> builder.autoCancelCall.call(t));
+        }
         return receiveBuilder.receiving(key, (t, continuation) -> {
             callback.call(t);
-            continuation.resumeWith(KotlinToJavaKt.getResultKt(null));
-            return null;
+            return t;
         });
     }
 
@@ -47,8 +54,7 @@ public class CorBus {
         ReceiveBuilder<T> receiveBuilder = new ReceiveBuilder<>();
         return receiveBuilder.receiving(key, (t, continuation) -> {
             callback.call(t);
-            continuation.resumeWith(KotlinToJavaKt.getResultKt(null));
-            return null;
+            return t;
         });
     }
 

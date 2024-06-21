@@ -10,6 +10,10 @@ import com.hamster.core.api.receive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.createCoroutine
+import kotlin.coroutines.resume
 import kotlin.random.Random
 
 class PostTestActivity : AppCompatActivity() {
@@ -55,5 +59,25 @@ class PostTestActivity : AppCompatActivity() {
         post("key", "普通消息3"){
             setStick(true)
         }
+    }
+    suspend fun craete(){
+        withContext(Dispatchers.IO){
+
+        }
+    }
+    val sf: suspend ()->Unit= {}
+
+    fun run(){
+        val continuation = sf.createCoroutine(object: Continuation<Unit>{
+            override val context: CoroutineContext
+                get() = TODO("Not yet implemented")
+
+            override fun resumeWith(result: Result<Unit>) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+        continuation.resume(Unit)
     }
 }
