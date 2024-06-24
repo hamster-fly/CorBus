@@ -27,7 +27,7 @@ internal class LifecycleReceiverIntercept<T>(
 ) : IReceiveIntercept<T> {
     // 什么都没有传，是全局
     private var lifecycleType: LifecycleType = LifecycleApplication()
-    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T?>) : IReceiver<T?> {
+    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T>) : IReceiver<T> {
         if(lifecycle != null){
             lifecycleType = LifecycleCustom(lifecycle)
         }else if(fragment != null){

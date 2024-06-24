@@ -14,7 +14,7 @@ fun post(key: String, msg: Any?, configure: (PostBuilder.() -> Unit)? = null) = 
 fun <T> receive(
     key: String,
     optionBuilder: (ReceiveBuilder<T>.() -> Unit)? = null,
-    receiveBlock: suspend (T?) -> Unit
+    receiveBlock: suspend (T) -> Unit
 ) : IReceiverControl {
     return ReceiveBuilder<T>().run {
         optionBuilder?.invoke(this)

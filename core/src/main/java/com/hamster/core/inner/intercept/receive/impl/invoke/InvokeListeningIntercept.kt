@@ -8,7 +8,7 @@ import com.hamster.core.inner.intercept.receive.protol.IReceiveIntercept
  */
 internal class InvokeListeningIntercept<T>: IReceiveIntercept<T> {
 
-    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T?>) : IReceiver<T?> {
+    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T>) : IReceiver<T> {
         val listener = chain.getChainContent()
         // 准备监听了。
         listener.prepareListening()

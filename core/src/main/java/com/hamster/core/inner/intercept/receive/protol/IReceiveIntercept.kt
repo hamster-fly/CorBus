@@ -7,7 +7,7 @@ import com.hamster.core.inner.intercept.receive.base.IReceiver
  */
 internal interface IReceiveIntercept<T>{
 
-    fun intercept(chain: IReceiverChain<T?>): IReceiver<T?>
+    fun intercept(chain: IReceiverChain<T>): IReceiver<T>
 
     interface IReceiverChain<C> {
 

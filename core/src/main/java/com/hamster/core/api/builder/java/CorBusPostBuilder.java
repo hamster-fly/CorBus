@@ -3,11 +3,11 @@ package com.hamster.core.api.builder.java;
 import com.hamster.core.api.builder.callback.PostProgressCallback;
 
 public class CorBusPostBuilder {
-    public PostProgressCallback progressCallback = null; // 进度回调
+    public PostProgressCallback progressCallback; // 进度回调
 
     // 同时发送同一个有序与无序消息，请不要开启粘性消息
-    public boolean isStick = false; // 是否粘性
-    public boolean isOrderly = true; // 是否有序
+    public boolean isStick; // 是否粘性
+    public boolean isOrderly; // 是否有序
 
 
     private CorBusPostBuilder(CorBusPostBuilder.Builder builder) {

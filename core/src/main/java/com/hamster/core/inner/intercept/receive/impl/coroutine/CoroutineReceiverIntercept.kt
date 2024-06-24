@@ -8,7 +8,7 @@ import com.hamster.core.inner.intercept.receive.protol.IReceiveIntercept
  */
 internal class CoroutineReceiverIntercept<T> : IReceiveIntercept<T> {
 
-    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T?>) : IReceiver<T?> {
+    override fun intercept(chain: IReceiveIntercept.IReceiverChain<T>) : IReceiver<T> {
         val content = chain.getChainContent()
         val proxy = ReceiverCoroutineProxy(content)
         return chain.process(proxy)
