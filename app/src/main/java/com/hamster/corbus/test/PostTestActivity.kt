@@ -22,10 +22,11 @@ class PostTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_post_test)
 
         receive<String>("key", {
-            setReceiveThread(DispatchThread.MAIN)
+            setReceiveThread(DispatchThread.IO)
             setCustomLifecycle(lifecycle)
             setAutoCancel { it == "cancel" }
         }) {
+            delay(300)
             Log.d("PostTestActivity", "1-->获取到数据-->${it}")
         }
 
@@ -43,6 +44,7 @@ class PostTestActivity : AppCompatActivity() {
             setAutoCancel { it == "cancel" }
         }) {
             Log.d("PostTestActivity", "3-->获取到数据-->${it}")
+            delay(200)
             withContext(Dispatchers.Main){
                 Log.d("PostTestActivity", "main-->获取到数据-->${it}")
             }
@@ -59,25 +61,5 @@ class PostTestActivity : AppCompatActivity() {
         post("key", "普通消息3"){
             setStick(true)
         }
-    }
-    suspend fun craete(){
-        withContext(Dispatchers.IO){
-
-        }
-    }
-    val sf: suspend ()->Unit= {}
-
-    fun run(){
-        val continuation = sf.createCoroutine(object: Continuation<Unit>{
-            override val context: CoroutineContext
-                get() = TODO("Not yet implemented")
-
-            override fun resumeWith(result: Result<Unit>) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-        continuation.resume(Unit)
     }
 }
