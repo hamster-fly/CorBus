@@ -48,7 +48,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01)
 
     signAllPublications()
-    coordinates("io.github.hamster-fly", "CorBus", "1.0.0-SNAPSHOT")
+    coordinates("io.github.hamster-fly", "CorBus", "1.0.1")
     configure(
         com.vanniktech.maven.publish.AndroidSingleVariantLibrary(
             variant = "release",
